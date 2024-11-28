@@ -4,7 +4,6 @@ import time
 import pylogix as pl
 import logger as log
 import utils as ut
-import numpy as np
 import signal
 
 # --- Slave ----
