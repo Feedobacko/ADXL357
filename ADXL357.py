@@ -7,7 +7,7 @@ changing some definitions to fit my purposes. Thanks!
 import spidev
 import time
 import RPi.GPIO as GPIO
-from ADXL357_definitions import *
+from .ADXL357_definitions import *
 
 class ADXL357():
     def __init__(self):
