@@ -28,7 +28,7 @@ client.SocketTimeout = 100
 output_range = 10         # Select measurement range, options: 10g, 20g, 40g
 sampling_rate = 1000             # Select sampling rate: 125, 250, 500, 1k, 2k, 4k
 hpass_corner = 0                # Select high-pass filter corner: 0...6
-duration = float(ut.read_plc_tag(client, tag)) # Record length in seconds
+duration = float(ut.read_plc_tag(client, duration_tag)) # Record length in seconds
 
 
 # --- LOGGER INPUTS ---
@@ -37,7 +37,7 @@ save_every = 1000
 # --- Names ---
 child_script = "heartbeatB.py"
 folder_name = 'test'  
-frequency = float(ut.read_plc_tag(client, tag))
+frequency = float(ut.read_plc_tag(client, frequency_tag))
 file_name = str(frequency)
 
 def main():

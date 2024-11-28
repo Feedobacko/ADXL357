@@ -15,6 +15,7 @@ testing = True
 tag_init = 'RB_INIT'
 tag_X = 'RB_501A_X'
 ip_address = '192.168.168.46'
+duration_tag = 'RutinaAlternadorLineal/Fob1'
 
 
 client = pl.PLC(ip_address)
@@ -24,7 +25,7 @@ client.SocketTimeout = 100
 output_range = 10  # Select measurement range, options: 10g, 20g, 40g
 sampling_rate = 1000  # Select sampling rate: 125, 250, 500, 1k, 2k, 4k
 hpass_corner = 0  # Select high-pass filter corner: 0...6
-duration = float(ut.read_plc_tag())  # Record length in seconds
+duration = float(ut.read_plc_tag(client, duration_tag)) # Record length in seconds
 
 # --- LOGGER INPUTS ---
 save_every = 1000
