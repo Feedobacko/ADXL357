@@ -15,7 +15,7 @@ testing = True
 tag_init = 'RB_INIT'
 tag_X = 'RB_501A_X'
 ip_address = '192.168.168.46'
-duration_tag = 'RutinaAlternadorLineal/Fob1'
+duration_tag = 'Program:RutinaAlternadorLineal.Fob1'
 
 
 client = pl.PLC(ip_address)
