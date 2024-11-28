@@ -126,7 +126,7 @@ class AccelerometerLogger():
             self.count = 0
             
         # Increment history index and wrap around for primary arrays
-        self.history_index = (self.history_index + 1) % self.N
+        self.history_index += 1
 
 
     def save_data_to_csv(self):
@@ -136,10 +136,10 @@ class AccelerometerLogger():
         
         # Save only the filled portion of the history arrays
         data_to_write = np.column_stack((
-            self.t_history[:self.history_index],
-            self.X_history[:self.history_index],
-            self.Y_history[:self.history_index],
-            self.Z_history[:self.history_index]
+            self.t_history,
+            self.X_history,
+            self.Y_history,
+            self.Z_history
         ))
         
         with open(self.file_path, mode='a', newline='') as file:
@@ -149,11 +149,6 @@ class AccelerometerLogger():
         self.clear_history()
     
     def clear_history(self):
-        # Reset history arrays and index
-        self.X_history.fill(0)
-        self.Y_history.fill(0)
-        self.Z_history.fill(0)
-        self.t_history.fill(0)
         self.history_index = 0
 
     def run(self):
