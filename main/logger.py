@@ -119,14 +119,14 @@ class AccelerometerLogger():
         self.ay_rms = self.calc_rms(self.Y_history2)
         self.az_rms = self.calc_rms(self.Z_history2)
     
+        # Increment history index and wrap around for primary arrays
+        self.history_index += 1
 
         # Save data to CSV when full
         if self.count == self.N:
             self.save_data_to_csv()
             self.count = 0
             
-        # Increment history index and wrap around for primary arrays
-        self.history_index += 1
 
 
     def save_data_to_csv(self):
