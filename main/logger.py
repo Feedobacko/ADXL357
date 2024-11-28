@@ -28,7 +28,7 @@ class AccelerometerLogger():
         self.last_save_t = 0
         self.history_index = 0
         self.i = 0
-        self.security_interval = 5  # Default value
+        self.security_interval = 100  # Default value
 
         self.sensor = ADXL357.ADXL357()
         self.sensor.setrange(output_range)
@@ -135,6 +135,7 @@ class AccelerometerLogger():
         print(f"Writing to csv {self.file_name}, at time {np.round(self.t, 2)} sec, dt: {dt}s, Hz: {Hz}")
         
         # Save only the filled portion of the history arrays
+        self.last_save_t = self.current_t
         data_to_write = np.column_stack((
             self.t_history,
             self.X_history,
@@ -145,7 +146,6 @@ class AccelerometerLogger():
         with open(self.file_path, mode='a', newline='') as file:
             writer = csv.writer(file)
             writer.writerows(data_to_write)
-        
         self.clear_history()
     
     def clear_history(self):

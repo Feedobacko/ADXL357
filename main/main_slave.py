@@ -28,7 +28,7 @@ hpass_corner = 0  # Select high-pass filter corner: 0...6
 duration = float(ut.read_plc_tag(client, duration_tag)) # Record length in seconds
 
 # --- LOGGER INPUTS ---
-save_every = 1000
+save_every = 10000
 child_script = "main/heartbeatA.py"
 
 
@@ -98,8 +98,10 @@ def main():
         sys.exit(0)
 
     finally:
-        ut.cleanup(connection, server_socket, child_process)
-        sys.exit(0)
+        try:
+            ut.cleanup(connection, server_socket, child_process)
+        except NameError:
+            print("Cleanup skipped: Some resources were not initialized.")
         
 if __name__ == '__main__':
     main()

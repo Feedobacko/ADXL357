@@ -31,7 +31,7 @@ duration = float(ut.read_plc_tag(client, duration_tag)) # Record length in secon
 
 
 # --- LOGGER INPUTS ---
-save_every = 1000
+save_every = 10000
 
 # --- Names ---
 child_script = "main/heartbeatB.py"
