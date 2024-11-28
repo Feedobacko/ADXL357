@@ -30,7 +30,7 @@ class AccelerometerLogger():
         self.i = 0
         self.security_interval = 5  # Default value
 
-        self.sensor = ADXL357()
+        self.sensor = ADXL357.ADXL357()
         self.setrange(output_range)
         self.setfilter(sampling_rate, hpass_corner)
         self.start()           
