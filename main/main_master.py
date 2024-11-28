@@ -34,7 +34,7 @@ duration = float(ut.read_plc_tag(client, duration_tag)) # Record length in secon
 save_every = 1000
 
 # --- Names ---
-child_script = "heartbeatB.py"
+child_script = "main/heartbeatB.py"
 folder_name = 'test'  
 frequency = float(ut.read_plc_tag(client, frequency_tag))
 file_name = str(frequency)
