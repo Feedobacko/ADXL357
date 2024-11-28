@@ -31,9 +31,9 @@ class AccelerometerLogger():
         self.security_interval = 5  # Default value
 
         self.sensor = ADXL357.ADXL357()
-        self.setrange(output_range)
-        self.setfilter(sampling_rate, hpass_corner)
-        self.start()           
+        self.sensor.setrange(output_range)
+        self.sensor.setfilter(sampling_rate, hpass_corner)
+        self.sensor.start()           
         
         self.client = client
         self.tag_X = tag_X

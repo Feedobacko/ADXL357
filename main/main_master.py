@@ -7,7 +7,7 @@ import utils as ut
 import signal
 
 # --- Slave ----
-host = '192.168.168.67'  
+host = '192.168.168.32'  
 port = 65410
 
 testing = True
