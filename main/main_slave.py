@@ -32,8 +32,7 @@ child_script = "heartbeatA.py"
 
 
 
-def main()
-    
+def main():
     try:
         child_process = ut.start_child_process(child_script)
     except Exception as e:

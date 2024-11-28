@@ -41,7 +41,7 @@ frequency = float(ut.read_plc_tag(client, tag))
 file_name = str(frequency)
 
 def main():
-        try:
+    try:
         child_process = ut.start_child_process(child_script)
     except Exception as e:
         print(f"Error starting heartbeat process: {e}")
