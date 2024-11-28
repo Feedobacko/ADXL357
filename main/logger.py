@@ -3,6 +3,7 @@ import time
 import numpy as np
 import csv
 from datetime import datetime
+import sys
 sys.path.append("../")
 from ADXL357 import ADXL357
 
