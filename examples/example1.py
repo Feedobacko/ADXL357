@@ -33,7 +33,7 @@ adxl357.calibrate()
 print("Recording...")
 start = time.time()
 for i in range(npts):
-    x,y,z = adxl357.getAxis()
+    x,y,z = adxl357.get_axis()
     data[:,i] = [x,y,z]
 end = time.time()
 

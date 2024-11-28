@@ -179,7 +179,7 @@ class ADXL357():
         sum_x, sum_y, sum_z = 0.0, 0.0, 0.0
 
         for _ in range(samples):
-            x, y, z = self.getAxis()  # Read scaled values in g
+            x, y, z = self.get_axis()  # Read scaled values in g
             sum_x += x
             sum_y += y
             sum_z += z
