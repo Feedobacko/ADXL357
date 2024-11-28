@@ -39,6 +39,7 @@ child_script = "heartbeatB.py"
 folder_name = 'test'  
 frequency = float(ut.read_plc_tag(client, frequency_tag))
 file_name = str(frequency)
+print(f'Trial name: {file_name}')
 
 def main():
     try:

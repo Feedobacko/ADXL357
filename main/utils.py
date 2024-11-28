@@ -88,6 +88,7 @@ def read_plc_tag(client, tag):
         try: 
             value = response.Value
             if value is not None:
+                print(f'Value found: {value}')
                 return value
         except:
             continue
