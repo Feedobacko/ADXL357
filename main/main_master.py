@@ -62,7 +62,8 @@ def main():
         sys.exit(1)
     
     try:
-        ut.send_string(client_socket, folder_name)  
+        ut.send_string(client_socket, folder_name)
+        time.sleep(1)
         ut.send_string(client_socket, file_name)
 
     except Exception as e:
