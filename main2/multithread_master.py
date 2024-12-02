@@ -107,7 +107,7 @@ def data_saving_task():
 def heartbeat_task():
     print('Starting heartbeat')
     try:
-        tag = 'RB_501A_HB'#RaspberryNormal'
+        tag = 'RB_501B_HB'#RaspberryNormal'
         ip_address = '192.168.168.46'
         ms = 500
         with pl.PLC(ip_address) as comm:

@@ -19,7 +19,7 @@ testing = True
 
 # --- PLC TAGS ---
 tag_init = 'RB_INIT'
-tag_X = 'RB_501B_X'
+tag_X = 'RB_501A_X'
 ip_address = '192.168.168.46'
 duration_tag = 'Program:RutinaAlternadorLineal.Fob1'
 frequency_tag = 'Program:RutinaAlternadorLineal.Fob1'
