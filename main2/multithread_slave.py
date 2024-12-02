@@ -133,7 +133,7 @@ if __name__ == "__main__":
     # Create and start threads
     connection, server_socket = ut.start_server(host, port)
     folder_name = ut.receive_string(connection)
-    file_name = ut.receive_string(connection)}
+    file_name = ut.receive_string(connection)
     
     if not testing:
         ut.wait_for_plc(client, tag_init)
