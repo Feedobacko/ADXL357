@@ -40,7 +40,7 @@ data_queue = queue.Queue(maxsize=SAVE_INTERVAL * 2)  # Holds raw data for saving
 rms_queue = queue.Queue(maxsize=10)  # Holds RMS values for PLC communication
 
 # Sensor setup
-sensor = ADXL357()
+sensor = ADXL357.ADXL357()
 sensor.setrange(10)
 sensor.setfilter(SAMPLING_RATE, 0)
 sensor.start()
