@@ -31,9 +31,9 @@ client.SocketTimeout = 100
 
 # --- Global Configuration ---
 SAMPLING_RATE = 2000  # Hz
-WINDOW_SIZE = 100  # Samples for RMS calculation
+WINDOW_SIZE = 1000  # Samples for RMS calculation
 SAVE_INTERVAL = 10000  # Samples to save in a chunk
-PLC_UPDATE_INTERVAL = 0.1  # Seconds between RMS updates to PLC
+PLC_UPDATE_INTERVAL = 0.5  # Seconds between RMS updates to PLC
 THRESHOLD = 5.0  # Acceleration threshold for alerts
 
 # Shared buffers
