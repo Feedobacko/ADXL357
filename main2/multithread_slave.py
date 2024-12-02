@@ -80,7 +80,7 @@ def rms_and_plc_task():
         print(f"Sending RMS to PLC: RMS=[{rms_x:.2f}, {rms_y:.2f}, {rms_z:.2f}]")
         send_values = [rms_x, rms_y, rms_z]
         try:
-            self.client.Write(self.tag_X, send_values)
+            client.Write(tag_X, send_values)
         except Exception as e:
             print(f'Failed to send values of acceleration: {e}')
             
