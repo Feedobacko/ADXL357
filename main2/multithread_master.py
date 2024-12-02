@@ -7,6 +7,7 @@ import sys
 import socket
 import pylogix as pl
 import utils as ut
+import os
 sys.path.append("../")
 from ADXL357 import ADXL357
 
