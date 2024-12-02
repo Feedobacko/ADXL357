@@ -12,7 +12,7 @@ from ADXL357 import ADXL357
 
 
 # --- Slave ----
-host = '192.168.168.32'  
+host = '0.0.0.0'  
 port = 65410
 
 testing = True
