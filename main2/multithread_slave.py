@@ -132,6 +132,8 @@ def heartbeat_task():
 # --- Main ---
 if __name__ == "__main__":
     # Create and start threads
+    duration = float(ut.read_plc_tag(client, duration_tag))
+
     connection, server_socket = ut.start_server(host, port)
     folder_name = ut.receive_string(connection)
     file_name = ut.receive_string(connection)
@@ -151,8 +153,9 @@ if __name__ == "__main__":
     heartbeat_thread.start()
     
     try:
-        while True:
+        while time.time()-start_time < duration:
             time.sleep(1)  # Keep main thread alive
+        print(f'Test finished, duration: {time.time()-start_time}')
     except KeyboardInterrupt:
         print("Shutting down...")
         sensor.stop()

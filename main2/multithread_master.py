@@ -134,6 +134,7 @@ if __name__ == "__main__":
     
     # Create and start threads
     frequency = float(ut.read_plc_tag(client, frequency_tag))
+    duration = float(ut.read_plc_tag(client, duration_tag))
     file_name = str(frequency)+'hz'
     folder_name = 'test'
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -141,7 +142,6 @@ if __name__ == "__main__":
     ut.send_string(client_socket, folder_name)
     time.sleep(1)
     ut.send_string(client_socket, file_name)
-
     
     if not testing:
         ut.wait_for_plc(client, tag_init)
@@ -158,8 +158,9 @@ if __name__ == "__main__":
     heartbeat_thread.start()
     
     try:
-        while True:
+        while time.time()-start_time < duration:
             time.sleep(1)  # Keep main thread alive
+        print(f'Test finished, duration: {time.time()-start_time}')
     except KeyboardInterrupt:
         print("Shutting down...")
         sensor.stop()
