@@ -37,7 +37,7 @@ class VibrationMonitor:
 
         # Shared buffers
         self.data_queue = queue.Queue(maxsize=self.save_interval * 2)  # Holds raw data
-        self.rms_queue = queue.Queue()  # Holds RMS values for PLC
+        self.rms_queue = queue.Queue(maxsize=100)  # Holds RMS values for PLC
 
         # Logging state
         self.is_logging = True  # Start with logging off
@@ -157,7 +157,6 @@ class VibrationMonitor:
         saving_thread = threading.Thread(target=self.data_saving_task, daemon=True)
         heartbeat_thread = threading.Thread(target=self.heartbeat_task, daemon=True)  
         heartbeat_thread.start()
-
 
         self.plc.wait_for_plc()
         self.sensor.start()
