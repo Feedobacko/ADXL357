@@ -103,8 +103,9 @@ class VibrationMonitor:
 
             # Send to PLC
             try:
-                print('Trying to write rms')
-                self.plc.client.Write(self.plc.config.get('TAG_X', 0), [rms_x, rms_y, rms_z])
+                send_values = [rms_x, rms_y, rms_z]
+                print(f'Trying to write rms: {send_values}')
+                self.plc.client.Write(self.plc.config.get('TAG_X', 0), send_values)
                 
             except Exception as e:
                 print(f'❌ Failed to send RMS values to PLC: {e}')
