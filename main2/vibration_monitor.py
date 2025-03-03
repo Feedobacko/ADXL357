@@ -128,7 +128,7 @@ class VibrationMonitor:
                 writer.writerows(chunk)
                 file.flush()
 
-    def heartbeat_task():
+    def heartbeat_task(self):
         print('Starting heartbeat')
         try:
             tag = self.plc.config.get('TAG_HEARTBEAT')
