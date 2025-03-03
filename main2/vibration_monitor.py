@@ -92,7 +92,7 @@ class VibrationMonitor:
             rms_x = float(np.sqrt(np.mean(buffer_np[:, 0] ** 2)))
             rms_y = float(np.sqrt(np.mean(buffer_np[:, 1] ** 2)))
             rms_z = float(np.sqrt(np.mean(buffer_np[:, 2] ** 2)))
-            self.rms_queue.put((rms_x, rms_y, rms_z))
+            #self.rms_queue.put((rms_x, rms_y, rms_z))
 
             # Threshold check
             if max(rms_x, rms_y, rms_z) > self.threshold:
