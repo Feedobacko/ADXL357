@@ -131,21 +131,17 @@ class VibrationMonitor:
     def heartbeat_task(self):
         print('Starting heartbeat')
         try:
-            tag = self.plc.config.get('TAG_HEARTBEAT')
-            ip_address = '192.168.168.46'
+            tag = self.plc.config.get('TAG_HEARTBEAT', None)
+            if not tag:
+                print("❌ Heartbeat tag not found in PLC configuration.")
+                return
             ms = 500
-            with pl.PLC(ip_address) as comm:
-                current_t = time.perf_counter()
-                value = True
-                t = 0
-                counter = 0
-                s = ms/1000
-                
-                while True:
-                    act_time = time.perf_counter()
-                    comm.Write(tag, int(value))
-                    time.sleep(s)
-                    value = not value
+            s = ms/1000
+            value = True
+            while True:
+                self.plc.client.Write(tag, int(value))
+                time.sleep(s)
+                value = not value  # Toggle value
         except KeyboardInterrupt:
             print("Child process interrupted and stopping...")
         finally:
