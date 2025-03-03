@@ -38,7 +38,7 @@ THRESHOLD = 5.0  # Acceleration threshold for alerts
 
 # Shared buffers
 data_queue = queue.Queue(maxsize=SAVE_INTERVAL * 2)  # Holds raw data for saving
-rms_queue = queue.Queue(maxsize=10)  # Holds RMS values for PLC communication
+rms_queue = queue.Queue()  # Holds RMS values for PLC communication
 
 # Sensor setup
 sensor = ADXL357.ADXL357()
