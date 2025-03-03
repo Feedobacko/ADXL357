@@ -10,7 +10,6 @@ sys.path.append("../")
 from ADXL357 import ADXL357
 from plc_interface import PLCInterface  # Import PLC class
 from config import CONFIG
-from plc_config import PLC_CONFIG
 import utils as ut
 
 
@@ -31,8 +30,8 @@ class VibrationMonitor:
         self.plc = PLCInterface(plc_config)
 
         # Read PLC values
-        self.frequency = float(self.plc.read_plc_tag(PLC_CONFIG["TAG_FREQUENCY"]))
-        self.duration = float(self.plc.read_plc_tag(PLC_CONFIG["TAG_DURATION"]))
+        self.frequency = float(self.plc.read_plc_tag(self.plc.config.get("TAG_FREQUENCY", 0)))
+        self.duration = float(self.plc.read_plc_tag(self.plc.config.get("TAG_DURATION", 0)))
 
         # Define file name
         self.file_name = f"{self.frequency}hz"
