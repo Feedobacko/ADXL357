@@ -104,7 +104,8 @@ class VibrationMonitor:
             # Send to PLC
             try:
                 print('Trying to write rms')
-                self.plc.client.Write(self.plc.config.get("TAG_X", 0), [rms_x, rms_y, rms_z])
+                self.plc.client.Write(self.plc.config.get('TAG_X', 0), [rms_x, rms_y, rms_z])
+                
             except Exception as e:
                 print(f'❌ Failed to send RMS values to PLC: {e}')
 
@@ -127,6 +128,29 @@ class VibrationMonitor:
                 writer.writerows(chunk)
                 file.flush()
 
+    def heartbeat_task():
+        print('Starting heartbeat')
+        try:
+            tag = self.plc.config.get('TAG_HEARTBEAT')
+            ip_address = '192.168.168.46'
+            ms = 500
+            with pl.PLC(ip_address) as comm:
+                current_t = time.perf_counter()
+                value = True
+                t = 0
+                counter = 0
+                s = ms/1000
+                
+                while True:
+                    act_time = time.perf_counter()
+                    comm.Write(tag, int(value))
+                    time.sleep(s)
+                    value = not value
+        except KeyboardInterrupt:
+            print("Child process interrupted and stopping...")
+        finally:
+            print("Stopped")
+            
     def run(self):
         """Start all system threads."""
 
@@ -134,6 +158,8 @@ class VibrationMonitor:
         sampling_thread = threading.Thread(target=self.sampling_task, daemon=True)
         rms_thread = threading.Thread(target=self.rms_and_plc_task, daemon=True)
         saving_thread = threading.Thread(target=self.data_saving_task, daemon=True)
+        heartbeat_thread = threading.Thread(target=heartbeat_task, daemon=True)  
+        heartbeat_thread.start()
 
 
         self.plc.wait_for_plc()
