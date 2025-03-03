@@ -150,13 +150,12 @@ class VibrationMonitor:
         rms_thread = threading.Thread(target=self.rms_and_plc_task, daemon=True)
         saving_thread = threading.Thread(target=self.data_saving_task, daemon=True)
 
+
+        self.plc.wait_for_plc()
+        
         sampling_thread.start()
         rms_thread.start()
         saving_thread.start()
-
-        # Wait for PLC signal if not testing
-        if not self.testing:
-            self.plc.wait_for_plc()
 
         start_time = time.time()
         try:
@@ -166,8 +165,9 @@ class VibrationMonitor:
                 # Stop logging and exit if VDF stopped running
 
                 else:
+                    print("⛔ Shutting down...")
                     self.sensor.stop()
-                
+                    break
 
             print(f"✅ Test finished, duration: {time.time() - start_time:.2f} seconds.")
             

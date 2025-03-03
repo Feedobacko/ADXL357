@@ -44,7 +44,7 @@ class PLCInterface:
             try: 
                 value = response.Value
                 if value is not None:
-                    print(f'Value found: {value}')
+                    #print(f'Value found: {value}')
                     return value
             except:
                 print('Error reading tag, retrying...')
