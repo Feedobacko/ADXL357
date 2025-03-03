@@ -158,7 +158,7 @@ class VibrationMonitor:
         sampling_thread = threading.Thread(target=self.sampling_task, daemon=True)
         rms_thread = threading.Thread(target=self.rms_and_plc_task, daemon=True)
         saving_thread = threading.Thread(target=self.data_saving_task, daemon=True)
-        heartbeat_thread = threading.Thread(target=heartbeat_task, daemon=True)  
+        heartbeat_thread = threading.Thread(target=self.heartbeat_task, daemon=True)  
         heartbeat_thread.start()
 
 
