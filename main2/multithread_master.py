@@ -143,8 +143,7 @@ if __name__ == "__main__":
     time.sleep(1)
     ut.send_string(client_socket, file_name)
     
-    if not testing:
-        ut.wait_for_plc(client, tag_init)
+
     start_time = time.time()
     
     sampling_thread = threading.Thread(target=sampling_task, daemon=True)
@@ -156,7 +155,10 @@ if __name__ == "__main__":
     rms_thread.start()
     saving_thread.start()
     heartbeat_thread.start()
-    
+
+    if not testing:
+        ut.wait_for_plc(client, tag_init)
+            
     try:
         while time.time()-start_time < duration:
             time.sleep(1)  # Keep main thread alive
