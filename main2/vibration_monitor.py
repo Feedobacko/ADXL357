@@ -40,7 +40,7 @@ class VibrationMonitor:
         self.rms_queue = queue.Queue()  # Holds RMS values for PLC
 
         # Logging state
-        self.is_logging = False  # Start with logging off
+        self.is_logging = True  # Start with logging off
         self.vdf_running = False
 
         # Read PLC string ID
