@@ -31,7 +31,6 @@ class VibrationMonitor:
 
         # Read PLC values
         self.frequency = float(self.plc.read_plc_tag(self.plc.config.get("TAG_FREQUENCY", 0)))
-        self.duration = float(self.plc.read_plc_tag(self.plc.config.get("TAG_DURATION", 0)))
 
         # Define file name
         self.file_name = f"{self.frequency}hz"
@@ -145,7 +144,6 @@ class VibrationMonitor:
 
     def run(self):
         """Start all system threads."""
-        print(f"🚀 Starting Vibration Monitoring for {self.duration} seconds...")
 
         # Start Threads
         sampling_thread = threading.Thread(target=self.sampling_task, daemon=True)
