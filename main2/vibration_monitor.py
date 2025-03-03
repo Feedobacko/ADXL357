@@ -73,10 +73,6 @@ class VibrationMonitor:
         print("📡 Starting sampling task...")
         start_time = time.time()
         while True:
-            self.check_if_running()
-            if not self.is_logging:
-                time.sleep(0.5)
-                continue
 
             x, y, z = self.sensor.get_axis()
             self.data_queue.put((time.time() - start_time, x, y, z))
@@ -86,11 +82,6 @@ class VibrationMonitor:
         print("📊 Starting RMS & PLC communication task...")
         buffer = []
         while True:
-            self.check_if_running()
-            if not self.is_logging:
-                time.sleep(0.5)
-                continue
-
             # Collect data for RMS
             while len(buffer) < self.window_size:
                 try:
@@ -125,13 +116,7 @@ class VibrationMonitor:
         with open(f"{self.folder_name}/{self.file_name}.csv", "w", newline="") as file:
             writer = csv.writer(file)
             writer.writerow(["timestamp", "accel_x", "accel_y", "accel_z"])  # CSV header
-
             while True:
-                self.check_if_running()
-                if not self.is_logging:
-                    time.sleep(0.5)
-                    continue
-
                 chunk = []
                 while len(chunk) < self.save_interval:
                     try:
