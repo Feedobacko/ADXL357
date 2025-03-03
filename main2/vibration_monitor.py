@@ -92,9 +92,9 @@ class VibrationMonitor:
 
             # Calculate RMS
             buffer_np = np.array(buffer[-self.window_size:])
-            rms_x = np.sqrt(np.mean(buffer_np[:, 0] ** 2))
-            rms_y = np.sqrt(np.mean(buffer_np[:, 1] ** 2))
-            rms_z = np.sqrt(np.mean(buffer_np[:, 2] ** 2))
+            rms_x = float(np.sqrt(np.mean(buffer_np[:, 0] ** 2)))
+            rms_y = float(np.sqrt(np.mean(buffer_np[:, 1] ** 2)))
+            rms_z = float(np.sqrt(np.mean(buffer_np[:, 2] ** 2)))
             self.rms_queue.put((rms_x, rms_y, rms_z))
 
             # Threshold check
