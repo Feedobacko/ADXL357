@@ -40,7 +40,7 @@ class VibrationMonitor:
         self.rms_queue = queue.Queue(maxsize=100)  # Holds RMS values for PLC
 
         # Logging state
-        self.is_logging = True  # Start with logging off
+        self.is_logging = True  # Start with logging on
         self.vdf_running = False
 
         # Read PLC string ID
@@ -56,15 +56,10 @@ class VibrationMonitor:
         """Check VDF status and control logging state."""
         tag = self.plc.config.get('VDF_STATUS', 0)
         value = self.plc.read_plc_tag(tag)
-
         if value == 2:
-            if not self.vdf_running:
-                print("✅ VDF started running. Logging enabled.")
             self.vdf_running = True
-            self.is_logging = True
             
-        elif self.vdf_running and value != 2:
-            print("❌ VDF stopped running. Logging disabled.")
+        if self.vdf_running and value != 2:
             self.vdf_running = False
             self.is_logging = False
             
@@ -72,8 +67,9 @@ class VibrationMonitor:
         """Continuously sample accelerometer data and add to queue."""
         print("📡 Starting sampling task...")
         start_time = time.time()
-        while True:
+        self.sensor.start()
 
+        while True:
             x, y, z = self.sensor.get_axis()
             self.data_queue.put((time.time() - start_time, x, y, z))
 
@@ -85,7 +81,7 @@ class VibrationMonitor:
             # Collect data for RMS
             while len(buffer) < self.window_size:
                 try:
-                    _, x, y, z = self.data_queue.get(timeout=0.1)
+                    t, x, y, z = self.data_queue.get(timeout=0.1)
                     buffer.append((x, y, z))
                 except queue.Empty:
                     continue
@@ -103,7 +99,7 @@ class VibrationMonitor:
 
             # Send to PLC
             try:
-                send_values = [rms_x, rms_y, rms_z]
+                send_values = [t, rms_x, rms_y, rms_z]
                 print(f'Trying to write rms: {send_values}')
                 self.plc.client.Write(self.plc.config.get('TAG_X', 0), send_values)
                 
@@ -159,7 +155,6 @@ class VibrationMonitor:
         heartbeat_thread.start()
 
         self.plc.wait_for_plc()
-        self.sensor.start()
 
         sampling_thread.start()
         rms_thread.start()
