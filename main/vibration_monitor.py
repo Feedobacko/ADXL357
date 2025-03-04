@@ -32,9 +32,6 @@ class VibrationMonitor:
         # Read PLC values
         self.frequency = float(self.plc.read_plc_tag(self.plc.config.get("TAG_FREQUENCY", 0)))
 
-        # Define file name
-        self.file_name = f"{self.frequency}hz"
-
         # Shared buffers
         self.data_queue = queue.Queue(maxsize=self.save_interval * 2)  # Holds raw data
         self.rms_queue = queue.Queue(maxsize=100)  # Holds RMS values for PLC
@@ -46,6 +43,8 @@ class VibrationMonitor:
         # Read PLC string ID
         self.id = self.plc.read_plc_string_tag(self.plc.config.get('TAG_ID_PRUEBA', 'NO_ID_FOUND'))
         print(f'🔹 Test ID: {self.id}') 
+        self.file_name = f"{self.frequency}_{self.id}hz"
+
         
         # Sensor setup
         self.sensor = ADXL357.ADXL357()

@@ -4,8 +4,8 @@ CONFIG = {
     "SAMPLING_RATE": 2000,  # Hz
     "WINDOW_SIZE": 100,  # Samples for RMS calculation
     "SAVE_INTERVAL": 10000,  # Samples per chunk
-    "PLC_UPDATE_INTERVAL": 0.05,  # Seconds between RMS updates
+    "PLC_UPDATE_INTERVAL": 0.0001,  # Seconds between RMS updates
     "THRESHOLD": 5.0,  # Acceleration threshold for alerts
     "TESTING": True,  # Set to False for actual PLC operation
-    "FOLDER_NAME": "test"
+    "FOLDER_NAME": "data_040325"
 }
