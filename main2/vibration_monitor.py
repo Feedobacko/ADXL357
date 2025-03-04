@@ -51,8 +51,7 @@ class VibrationMonitor:
         self.sensor = ADXL357.ADXL357()
         self.sensor.setrange(10)
         self.sensor.setfilter(self.sampling_rate, 0)
-        time.sleep(1)
-        
+
     def check_if_running(self):
         """Check VDF status and control logging state."""
         tag = self.plc.config.get('VDF_STATUS', 0)
@@ -98,7 +97,6 @@ class VibrationMonitor:
             # Threshold check
             if max(rms_x, rms_y, rms_z) > self.threshold:
                 print(f"⚠️ Threshold exceeded: RMS=[{rms_x:.2f}, {rms_y:.2f}, {rms_z:.2f}]")
-
             # Send to PLC
             try:
                 send_values = [t, rms_x, rms_y, rms_z]
@@ -148,7 +146,6 @@ class VibrationMonitor:
             
     def run(self):
         """Start all system threads."""
-
         # Start Threads
         sampling_thread = threading.Thread(target=self.sampling_task, daemon=True)
         rms_thread = threading.Thread(target=self.rms_and_plc_task, daemon=True)
@@ -186,7 +183,7 @@ if __name__ == "__main__":
     # Check if a PLC config file was provided in the command line
     if len(sys.argv) < 2:
         print("❌ Error: No PLC configuration file provided.")
-        print("Usage: python vibration_monitor.py <plc_config_file>")
+        print("Usage: python vibration_monitor.py <plc_config_file>.py")
         sys.exit(1)
 
     plc_config_file = sys.argv[1]  # Get the PLC config filename from command line

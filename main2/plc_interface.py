@@ -78,7 +78,6 @@ class PLCInterface:
             except:
                 print('Error reading tag, retrying...')
                 continue
-            time.sleep(0.0001)
     
     def toggle_plc_tag(self, tag, duration=1):
         """ Toggles a boolean PLC tag ON, waits, then sets it OFF """
