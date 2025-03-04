@@ -10,8 +10,6 @@ sys.path.append("../")
 from ADXL357 import ADXL357
 from plc_interface import PLCInterface  # Import PLC class
 from config import CONFIG
-import utils as ut
-
 
 class VibrationMonitor:
     def __init__(self, plc_config):
