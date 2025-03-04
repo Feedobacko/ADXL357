@@ -76,8 +76,9 @@ class VibrationMonitor:
     def rms_and_plc_task(self):
         """Compute RMS and send to PLC."""
         print("📊 Starting RMS & PLC communication task...")
-        buffer = []
+
         while True:
+            buffer = []
             # Collect data for RMS
             while len(buffer) < self.window_size:
                 try:
@@ -164,8 +165,6 @@ class VibrationMonitor:
             while True:
                 if self.is_logging:
                     self.check_if_running()
-                # Stop logging and exit if VDF stopped running
-
                 else:
                     print("⛔ Shutting down...")
                     self.sensor.stop()
