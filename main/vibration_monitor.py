@@ -82,7 +82,7 @@ class VibrationMonitor:
             # Collect data for RMS
             while len(buffer) < self.window_size:
                 try:
-                    t, x, y, z = self.data_queue.get(timeout=0.1)
+                    t, x, y, z = self.data_queue.get(timeout=0.01)
                     buffer.append((x, y, z))
                 except queue.Empty:
                     continue
