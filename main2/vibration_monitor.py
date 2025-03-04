@@ -51,7 +51,8 @@ class VibrationMonitor:
         self.sensor = ADXL357.ADXL357()
         self.sensor.setrange(10)
         self.sensor.setfilter(self.sampling_rate, 0)
-
+        time.sleep(1)
+        
     def check_if_running(self):
         """Check VDF status and control logging state."""
         tag = self.plc.config.get('VDF_STATUS', 0)
