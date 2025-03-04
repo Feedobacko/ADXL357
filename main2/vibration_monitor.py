@@ -28,6 +28,7 @@ class VibrationMonitor:
 
         # Init PLC Interface
         self.plc = PLCInterface(plc_config)
+        self.status_plc = PLCInterface(plc_config)
         self.heartbeat_plc =  PLCInterface(plc_config)
 
         # Read PLC values
@@ -55,8 +56,8 @@ class VibrationMonitor:
 
     def check_if_running(self):
         """Check VDF status and control logging state."""
-        tag = self.plc.config.get('VDF_STATUS', 0)
-        value = self.plc.read_plc_tag(tag)
+        tag = self.status_plc.config.get('VDF_STATUS', 0)
+        value = self.status_plc.read_plc_tag(tag)
         if value == 2:
             self.vdf_running = True
             
