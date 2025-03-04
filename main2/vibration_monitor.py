@@ -28,6 +28,7 @@ class VibrationMonitor:
 
         # Init PLC Interface
         self.plc = PLCInterface(plc_config)
+        self.heartbeat_plc =  PLCInterface(plc_config)
 
         # Read PLC values
         self.frequency = float(self.plc.read_plc_tag(self.plc.config.get("TAG_FREQUENCY", 0)))
@@ -129,7 +130,7 @@ class VibrationMonitor:
     def heartbeat_task(self):
         print('Starting heartbeat')
         try:
-            tag = self.plc.config.get('TAG_HEARTBEAT', None)
+            tag = self.heartbeat_plc.config.get('TAG_HEARTBEAT', None)
             if not tag:
                 print("❌ Heartbeat tag not found in PLC configuration.")
                 return
@@ -137,7 +138,7 @@ class VibrationMonitor:
             s = ms/1000
             value = True
             while True:
-                self.plc.client.Write(tag, int(value))
+                self.heartbeat_plc.client.Write(tag, int(value))
                 time.sleep(s)
                 value = not value  # Toggle value
         except KeyboardInterrupt:
