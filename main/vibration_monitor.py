@@ -43,7 +43,7 @@ class VibrationMonitor:
         # Read PLC string ID
         self.id = self.plc.read_plc_string_tag(self.plc.config.get('TAG_ID_PRUEBA', 'NO_ID_FOUND'))
         print(f'🔹 Test ID: {self.id}') 
-        self.file_name = f"{self.frequency}_{self.id}hz"
+        self.file_name = f"{self.frequency}hz_{self.id}"
 
         
         # Sensor setup
@@ -70,7 +70,7 @@ class VibrationMonitor:
 
         while True:
             x, y, z = self.sensor.get_axis()
-            self.data_queue.put((time.time() - start_time, x, y, z))
+            self.data_queue.put((time.time() - start_time, y, x, z)) ##CAMBIAMOS EJES X E Y DEBIDO A CONFIGURACION DEL SENSOR ANTIGUO
 
     def rms_and_plc_task(self):
         """Compute RMS and send to PLC."""
