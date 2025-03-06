@@ -24,6 +24,8 @@ class VibrationMonitor:
         self.testing = CONFIG["TESTING"]
         self.folder_name = CONFIG["FOLDER_NAME"]
 
+        self.g = 9.80665
+
         # Init PLC Interface
         self.plc = PLCInterface(plc_config)
         self.status_plc = PLCInterface(plc_config)
@@ -48,7 +50,7 @@ class VibrationMonitor:
         
         # Sensor setup
         self.sensor = ADXL357.ADXL357()
-        self.sensor.setrange(10)
+        self.sensor.setrange(40)
         self.sensor.setfilter(self.sampling_rate, 0)
 
     def check_if_running(self):
@@ -69,7 +71,11 @@ class VibrationMonitor:
         self.sensor.start()
 
         while True:
-            x, y, z = self.sensor.get_axis()
+            x0, y0, z0 = self.sensor.get_axis()
+            x = self.g*x0
+            y = self.g*y0
+            z = self.g*z0
+            
             self.data_queue.put((time.time() - start_time, y, x, z)) ##CAMBIAMOS EJES X E Y DEBIDO A CONFIGURACION DEL SENSOR ANTIGUO
 
     def rms_and_plc_task(self):

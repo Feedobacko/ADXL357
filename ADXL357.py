@@ -26,8 +26,8 @@ class ADXL357():
             GPIO.setup(self.drdy_pin, GPIO.IN)
         
         # Default device parameters
-        RANGE = 10
-        ODR   = 1000
+        RANGE = 40
+        ODR   = 4000
         HPFC  = 0
         
         # Device init
@@ -71,7 +71,7 @@ class ADXL357():
                 print("\nTimeout while polling DRDY pin")
         else:
             time.sleep(self.drdy_timeout)
-            print("\nDRDY pin did not connected")
+            print("\nDRDY pin not connected")
 
     def wait2go_low(self):
         drdy_level = GPIO.input(self.drdy_pin)
