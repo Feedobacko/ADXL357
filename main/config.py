@@ -7,5 +7,5 @@ CONFIG = {
     "PLC_UPDATE_INTERVAL": 0.0001,  # Seconds between RMS updates
     "THRESHOLD": 5.0,  # Acceleration threshold for alerts
     "TESTING": True,  # Set to False for actual PLC operation
-    "FOLDER_NAME": "data_050325"
+    "FOLDER_NAME": "data_060325"
 }
